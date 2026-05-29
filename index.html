@@ -465,6 +465,7 @@
     var hr2=new THREE.Mesh(new THREE.TorusGeometry(1.15,.012,6,48),sm.clone());
     hr2.material.opacity=.04;hr2.rotation.x=.5;hr2.rotation.y=.3;heroGroup.add(hr2);
     heroGroup.position.set(0,1,0);
+    scene3d.add(heroGroup);
 
     /* ── H1: Monitor ── */
     var g1=new THREE.Group();
@@ -832,6 +833,9 @@
     .set('#s-cta',{opacity:1})
     .fromTo('.cta-title',{opacity:.03,scale:.9},{opacity:1,scale:1,duration:.8,ease:'power3.out'})
     .fromTo('.store-buttons',{opacity:0,y:18},{opacity:1,y:0,duration:.6,ease:'power3.out'},'<.25')
+
+  gsap.set('.site-footer',{opacity:0,y:24});
+  gsap.to('.site-footer',{opacity:1,y:0,duration:.9,ease:'power2.out',scrollTrigger:{trigger:'.site-footer',start:'top 98%'}});
 
   /* ── Three.js State ── */
   function upThree(p){

@@ -10,8 +10,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
     *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;cursor:none !important;-webkit-user-select:none;user-select:none}
-    html{overflow-x:hidden;touch-action:manipulation}
-    body{background:#000;color:#fff;font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;overflow-x:hidden;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+    html{overflow-x:hidden;touch-action:manipulation;-ms-overflow-style:none;scrollbar-width:none}
+    html::-webkit-scrollbar{display:none}
+    body{background:#000;color:#fff;font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;overflow-x:hidden;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;-ms-overflow-style:none;scrollbar-width:none}
+    body::-webkit-scrollbar{display:none}
     ::selection{background:transparent}
     a{color:inherit;text-decoration:none}
     .preloader{position:fixed;inset:0;background:#000;z-index:9999;pointer-events:none}
@@ -23,6 +25,10 @@
     .glass-left{display:flex;align-items:center;gap:12px}
     .glass-logo{width:44px;height:44px;border-radius:11px;object-fit:cover}
     .glass-name{font-size:1.15rem;font-weight:800;letter-spacing:-.02em}
+    .glass-right{display:flex;align-items:center;gap:10px}
+    .glass-icon-btn{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);transition:background .3s,border-color .3s,transform .3s cubic-bezier(.4,0,.2,1);flex-shrink:0}
+    .glass-icon-btn:hover{background:#5865f2;border-color:transparent;transform:scale(1.08)}
+    .glass-icon-btn svg{width:20px;height:20px;fill:#fff}
     .glass-btn-wrap{position:relative}
     .glass-btn{padding:9px 28px;border-radius:100px;background:#fff;color:#000;font-size:.78rem;font-weight:700;letter-spacing:-.01em;transition:all .35s cubic-bezier(.4,0,.2,1);cursor:pointer;border:none;display:flex;align-items:center;gap:.4rem}
     .glass-btn:hover{background:rgba(255,255,255,.88);transform:scale(1.04)}
@@ -48,7 +54,7 @@
     .scene{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:10;opacity:0;padding:2rem;text-align:center}
 
     #s-hero{perspective:900px;justify-content:flex-end;padding-bottom:20vh}
-    .hero-title{font-size:clamp(4.5rem,14vw,13rem);font-weight:900;letter-spacing:-.06em;line-height:.85}
+    .hero-title{font-size:clamp(4.5rem,14vw,13rem);font-weight:900;letter-spacing:-.06em;line-height:.85;color:#fff;background:linear-gradient(180deg,#fff 52%,rgba(255,255,255,.6));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
     .hero-logo-mob{display:block;width:clamp(240px,27vw,390px);margin-bottom:1.5rem}
 
     .lr{display:block}
@@ -93,16 +99,16 @@
     .store-btn-text{text-align:left}
     .store-btn-sub{font-size:.55rem;font-weight:400;opacity:.45;display:block;line-height:1.2}
     .store-btn-main{font-size:1rem;font-weight:600;display:block;line-height:1.2}
+    .store-btn-discord svg{fill:#fff}
+    .store-btn-discord:hover{background:rgba(88,101,242,.16);border-color:rgba(88,101,242,.55)}
 
-    /* ── Footer ── */
-    .site-footer{position:relative;z-index:50;padding:1.4rem 2.5rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;border-top:1px solid rgba(255,255,255,.07);background:#000;flex-wrap:wrap}
-    .footer-copy{font-size:.75rem;color:rgba(255,255,255,.22);letter-spacing:.05em}
-    .footer-links{display:flex;gap:1.4rem}
-    .footer-links button{background:none;border:none;color:rgba(255,255,255,.38);font-size:.78rem;font-weight:400;letter-spacing:.03em;cursor:pointer;transition:color .25s;padding:0;font-family:inherit}
-    .footer-links button:hover{color:rgba(255,255,255,.8)}
-    .footer-dl-link{display:flex;align-items:center;gap:.35rem;color:rgba(255,255,255,.38);text-decoration:none;font-size:.78rem;font-weight:400;letter-spacing:.03em;transition:color .25s}
-    .footer-dl-link:hover{color:rgba(255,255,255,.8)}
-    .footer-dl-link svg{width:13px;height:13px;flex-shrink:0}
+    /* ── CTA credit ── */
+    .cta-credit{margin-top:2.4rem;display:flex;flex-direction:column;gap:.32rem;align-items:center}
+    .cta-credit-main{font-size:.85rem;font-weight:500;color:rgba(255,255,255,.5);letter-spacing:.04em}
+    .cta-credit-sub{font-size:.8rem;color:rgba(255,255,255,.32);letter-spacing:.04em}
+    .cta-credit-legal{margin-top:.55rem;font-size:.72rem;color:rgba(255,255,255,.2);letter-spacing:.04em}
+    .cta-credit-legal button{background:none;border:none;color:rgba(255,255,255,.32);font-size:.72rem;cursor:pointer;font-family:inherit;padding:0;letter-spacing:.04em;transition:color .25s}
+    .cta-credit-legal button:hover{color:rgba(255,255,255,.7)}
     /* ── Modals ── */
     .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.78);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);z-index:2000;display:flex;align-items:center;justify-content:center;padding:2rem;opacity:0;pointer-events:none;transition:opacity .3s}
     .modal-overlay.active{opacity:1;pointer-events:auto}
@@ -116,71 +122,85 @@
     .modal-box p{color:rgba(255,255,255,.5);line-height:1.7;font-size:.9rem}
 
     @media(max-width:768px){
-      /* Show 3D on mobile — only hide cursor dot + water canvas */
       #cdot,#water-canvas{display:none !important}
-      #three-wrap{opacity:.68}
       *{cursor:auto !important}
 
-      /* Nav */
-      .glass-bar{top:10px;width:calc(100% - 2rem);max-width:460px}
-      .glass-inner{gap:.8rem;padding:7px 10px 7px 12px}
-      .glass-logo{width:30px;height:30px;border-radius:7px}
-      .glass-name{font-size:.82rem}
-      .glass-btn{padding:6px 14px;font-size:.7rem;gap:.3rem}
-      .glass-dropdown{right:0;min-width:155px}
+      /* 3D canvas — clipped to top 56 % so particles live above text */
+      #three-wrap{clip-path:inset(0 0 44% 0)}
 
-      /* Hero */
-      #s-hero{justify-content:center;padding-bottom:0}
-      .hero-logo-mob{width:clamp(140px,44vw,220px)}
-      .hero-title{font-size:clamp(3.2rem,16vw,5.5rem)}
+      /* ── Nav ── */
+      .glass-bar{top:10px;width:calc(100% - 1.4rem);max-width:none}
+      .glass-inner{gap:.45rem;padding:7px 8px 7px 11px;border-radius:20px}
+      .glass-left{gap:8px}
+      .glass-logo{width:30px;height:30px;border-radius:8px}
+      .glass-name{font-size:.88rem}
+      .glass-right{gap:6px}
+      .glass-icon-btn{width:36px;height:36px}
+      .glass-icon-btn svg{width:18px;height:18px}
+      .glass-btn{padding:8px 15px;font-size:.74rem;gap:.3rem}
+      .glass-dropdown{right:0;min-width:165px}
+      .scroll-hint{bottom:1.4rem}
+      .scroll-hint span{font-size:.55rem}
 
-      /* Quote */
-      .tag-mark{display:none}
-      .tagline{font-size:clamp(1.4rem,5.5vw,2.4rem)}
-      .tag-attr{font-size:clamp(.7rem,2.5vw,.88rem)}
+      /* ── Hero — logo mark + type ── */
+      #s-hero{justify-content:center;align-items:center;padding:0 1.5rem}
+      .hero-logo-mob{display:block;width:clamp(92px,29vw,140px);margin-bottom:1.4rem;filter:drop-shadow(0 10px 44px rgba(255,255,255,.1))}
+      .hero-title{font-size:clamp(4.8rem,23vw,8.5rem);letter-spacing:-.06em;line-height:.86;text-align:center}
 
-      /* Setup */
-      .setup-text{font-size:clamp(1.2rem,4.5vw,2rem)}
-      .setup-icons{gap:clamp(.6rem,2.5vw,1.1rem);margin-top:1.8rem}
-      .app-icon-box{width:clamp(58px,14.5vw,76px);height:clamp(58px,14.5vw,76px)}
-      .setup-icon span{font-size:clamp(.58rem,2.2vw,.72rem)}
+      /* ── Quote ── */
+      .tag-mark{display:block;font-size:80vw;top:40%}
+      .tagline{font-size:clamp(1.6rem,6.6vw,2.5rem);line-height:1.22;padding:0 .5rem}
+      .tag-attr{font-size:clamp(.74rem,2.9vw,.92rem);margin-top:1.4rem}
 
-      /* Habit scenes — text centred, particles behind */
-      .scene-h-left{align-items:center !important;padding:1.5rem !important}
-      .scene-h-left .habit-content{text-align:center;align-items:center}
-      .habit-content{max-width:88vw}
-      .habit-line{transform-origin:center;margin:.75rem auto}
-      .habit-num{font-size:clamp(2.8rem,13vw,5.5rem)}
-      .habit-title{font-size:clamp(1.45rem,5.5vw,2.2rem);text-shadow:0 2px 24px rgba(0,0,0,.75)}
-      .habit-desc{font-size:clamp(.78rem,3vw,.92rem);max-width:78vw;text-shadow:0 1px 12px rgba(0,0,0,.6)}
+      /* ── Setup icons ── */
+      .setup-text{font-size:clamp(1.4rem,5.8vw,2.1rem);line-height:1.18}
+      .setup-icons{gap:.6rem .55rem;margin-top:2.3rem;max-width:360px}
+      .setup-icon{gap:.55rem}
+      .app-icon-box{width:clamp(50px,14.5vw,74px);height:clamp(50px,14.5vw,74px);border-radius:24%}
+      .setup-icon span{font-size:clamp(.58rem,2.3vw,.72rem);opacity:.62}
 
-      /* Impact */
-      .impact-ring{display:none}
-      .impact-l{font-size:clamp(1.25rem,5.5vw,1.9rem)}
-      .impact-bold{font-size:clamp(1.55rem,6.5vw,2.3rem)}
+      /* ── Habit scenes — text pinned to bottom, 3D floats in top clip zone ── */
+      .scene-h{padding:0 !important}
+      .scene-h-left{align-items:center !important;justify-content:flex-end !important;padding:0 1.6rem 5rem !important}
+      .scene-h-left::after{content:'';position:absolute;left:0;right:0;bottom:0;height:48%;background:linear-gradient(to top,#000 8%,rgba(0,0,0,.8) 42%,transparent);z-index:0;pointer-events:none}
+      .scene-h-left .habit-content{text-align:center;align-items:center;max-width:92vw;position:relative;z-index:1}
+      .habit-num{font-size:.7rem;font-weight:600;letter-spacing:.24em;opacity:.4;line-height:1}
+      .habit-line{transform-origin:center;margin:.7rem auto;width:30px}
+      .habit-title{font-size:clamp(2rem,8.5vw,3rem);letter-spacing:-.03em;line-height:1.06;text-shadow:0 2px 40px rgba(0,0,0,.95)}
+      .habit-desc{font-size:clamp(.95rem,4vw,1.1rem);max-width:80vw;line-height:1.6;margin-top:.7rem;opacity:.68;text-shadow:0 1px 20px rgba(0,0,0,.9)}
 
-      /* CTA */
-      .cta-title{font-size:clamp(1.8rem,8.5vw,3.2rem)}
-      .store-buttons{flex-direction:column;align-items:center;gap:.7rem}
-      .store-btn{width:196px;justify-content:center}
+      /* ── Impact ── */
+      .impact-ring{display:block;width:min(88vw,58vh);height:min(88vw,58vh)}
+      .impact-l{font-size:clamp(1.4rem,6.2vw,2rem);line-height:1.4}
+      .impact-bold{font-size:clamp(1.8rem,8vw,2.7rem)}
 
-      /* Footer */
-      .site-footer{padding:1.1rem 1.2rem;flex-direction:column;align-items:flex-start;gap:.65rem}
-      .footer-links{flex-wrap:wrap;gap:.6rem 1rem}
-      .footer-copy{font-size:.7rem}
+      /* ── CTA ── */
+      .cta-title{font-size:clamp(2.2rem,10vw,3.6rem);margin-bottom:2.2rem;line-height:.94}
+      .store-buttons{flex-direction:column;align-items:center;gap:.75rem;width:100%}
+      .store-btn{width:min(280px,82vw);justify-content:flex-start;padding:.85rem 1.4rem}
 
-      /* Modal */
-      .modal-overlay{padding:.75rem}
-      .modal-box{padding:1.4rem;border-radius:.9rem;max-height:90vh}
-      .modal-box h2{font-size:1.3rem}
+      /* ── CTA credit ── */
+      .cta-credit{margin-top:2rem}
+
+      /* ── Modal ── */
+      .modal-overlay{padding:.85rem}
+      .modal-box{padding:1.5rem;border-radius:1.1rem;max-height:88vh}
+      .modal-box h2{font-size:1.35rem}
       .modal-box p{font-size:.88rem}
     }
     @media(max-width:390px){
-      .hero-title{font-size:clamp(2.8rem,15vw,4.5rem)}
-      .glass-bar{width:calc(100% - 1.4rem)}
-      .app-icon-box{width:54px;height:54px}
-      .store-btn{width:176px}
-      .tagline{font-size:clamp(1.2rem,5vw,2rem)}
+      .hero-title{font-size:clamp(4.4rem,21vw,7rem)}
+      .hero-logo-mob{width:84px;margin-bottom:1.1rem}
+      .glass-bar{width:calc(100% - 1.1rem)}
+      .glass-name{font-size:.82rem}
+      .glass-btn{padding:8px 13px;font-size:.72rem}
+      .glass-icon-btn{width:34px;height:34px}
+      .app-icon-box{width:52px;height:52px}
+      .setup-icon span{font-size:.6rem}
+      .store-btn{width:min(260px,84vw)}
+      .tagline{font-size:clamp(1.35rem,5.9vw,2rem)}
+      .habit-title{font-size:clamp(1.8rem,7.8vw,2.5rem)}
+      .cta-title{font-size:clamp(2rem,9.5vw,3.2rem)}
     }
     @media(hover:none){#cdot{display:none !important}*{cursor:auto !important}}
   </style>
@@ -194,20 +214,25 @@
         <img src="logo-nobg.png" class="glass-logo" alt="">
         <span class="glass-name">Founder</span>
       </div>
-      <div class="glass-btn-wrap" id="dlWrap">
-        <button class="glass-btn" id="dlBtn">
-          Download
-          <svg viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1l4 4 4-4"/></svg>
-        </button>
-        <div class="glass-dropdown">
-          <a href="ios.html">
-            <svg viewBox="0 0 24 24"><path d="M17.05 20.28c-.98.95-2.05.88-3.08.4-1.09-.5-2.08-.48-3.24 0-1.44.62-2.2.44-3.06-.4C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/></svg>
-            iOS — App Store
-          </a>
-          <a href="android.html">
-            <svg viewBox="0 0 24 24"><path d="M17.6 9.48l1.84-3.18c.16-.31.04-.69-.26-.85a.637.637 0 00-.83.22l-1.88 3.24A10.74 10.74 0 0012 8c-1.53 0-2.99.31-4.27.91L5.65 5.67a.637.637 0 00-.83-.22c-.3.16-.42.54-.26.85L6.4 9.48C4.31 10.78 2.88 13.07 2.88 15.7H21.1c0-2.63-1.43-4.92-3.5-6.22zm-7.95 3.13c-.41 0-.75-.34-.75-.75 0-.41.34-.75.75-.75s.75.34.75.75c0 .41-.34.75-.75.75zm4.7 0c-.41 0-.75-.34-.75-.75 0-.41.34-.75.75-.75s.75.34.75.75c0 .41-.34.75-.75.75z"/></svg>
-            Android — Beta
-          </a>
+      <div class="glass-right">
+        <a href="https://discord.gg" target="_blank" rel="noopener" class="glass-icon-btn" aria-label="Join our Discord">
+          <svg viewBox="0 0 24 24"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2096 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2097 0 2.1758 1.0952 2.1569 2.419 0 1.3332-.9472 2.4189-2.1569 2.4189Z"/></svg>
+        </a>
+        <div class="glass-btn-wrap" id="dlWrap">
+          <button class="glass-btn" id="dlBtn">
+            Download
+            <svg viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1l4 4 4-4"/></svg>
+          </button>
+          <div class="glass-dropdown">
+            <a href="ios.html">
+              <svg viewBox="0 0 24 24"><path d="M17.05 20.28c-.98.95-2.05.88-3.08.4-1.09-.5-2.08-.48-3.24 0-1.44.62-2.2.44-3.06-.4C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/></svg>
+              iOS — App Store
+            </a>
+            <a href="android.html">
+              <svg viewBox="0 0 24 24"><path d="M17.6 9.48l1.84-3.18c.16-.31.04-.69-.26-.85a.637.637 0 00-.83.22l-1.88 3.24A10.74 10.74 0 0012 8c-1.53 0-2.99.31-4.27.91L5.65 5.67a.637.637 0 00-.83-.22c-.3.16-.42.54-.26.85L6.4 9.48C4.31 10.78 2.88 13.07 2.88 15.7H21.1c0-2.63-1.43-4.92-3.5-6.22zm-7.95 3.13c-.41 0-.75-.34-.75-.75 0-.41.34-.75.75-.75s.75.34.75.75c0 .41-.34.75-.75.75zm4.7 0c-.41 0-.75-.34-.75-.75 0-.41.34-.75.75-.75s.75.34.75.75c0 .41-.34.75-.75.75z"/></svg>
+              Android — Beta
+            </a>
+          </div>
         </div>
       </div>
     </div>
@@ -335,25 +360,18 @@
           <svg viewBox="0 0 512 512"><path d="M48 59.49v393a4.33 4.33 0 007.37 3.07L260 256 55.37 56.42A4.33 4.33 0 0048 59.49zM345.8 174L89.22 32.64l-.16-.09c-4.42-2.4-8.62 3.58-5 7.06l201.13 192.32zM84.08 472.39c-3.64 3.48.56 9.46 5 7.06l.16-.09L345.8 338l-60.61-57.95zM449.38 231l-71.65-39.46L310.36 256l67.37 64.43 71.65-39.46a25 25 0 000-50z"/></svg>
           <div class="store-btn-text"><span class="store-btn-sub">Get it on</span><span class="store-btn-main">Google Play</span></div>
         </a>
+        <a href="https://discord.gg" target="_blank" rel="noopener" class="store-btn store-btn-discord">
+          <svg viewBox="0 0 24 24"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2096 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2097 0 2.1758 1.0952 2.1569 2.419 0 1.3332-.9472 2.4189-2.1569 2.4189Z"/></svg>
+          <div class="store-btn-text"><span class="store-btn-sub">Join our</span><span class="store-btn-main">Discord</span></div>
+        </a>
+      </div>
+      <div class="cta-credit">
+        <span class="cta-credit-main">© 2026 Founder</span>
+        <span class="cta-credit-sub">Powered by @77apps</span>
+        <span class="cta-credit-legal"><button data-modal="privacy">Privacy</button> · <button data-modal="terms">Terms</button></span>
       </div>
     </div>
   </section>
-
-  <footer class="site-footer">
-    <span class="footer-copy">© 2026 Founder &nbsp;·&nbsp; Powered by @77apps</span>
-    <div class="footer-links">
-      <a href="ios.html" class="footer-dl-link">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.05 20.28c-.98.95-2.05.88-3.08.4-1.09-.5-2.08-.48-3.24 0-1.44.62-2.2.44-3.06-.4C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/></svg>
-        iOS
-      </a>
-      <a href="android.html" class="footer-dl-link">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.6 9.48l1.84-3.18c.16-.31.04-.69-.26-.85a.637.637 0 00-.83.22l-1.88 3.24A10.74 10.74 0 0012 8c-1.53 0-2.99.31-4.27.91L5.65 5.67a.637.637 0 00-.83-.22c-.3.16-.42.54-.26.85L6.4 9.48C4.31 10.78 2.88 13.07 2.88 15.7H21.1c0-2.63-1.43-4.92-3.5-6.22zm-7.95 3.13c-.41 0-.75-.34-.75-.75 0-.41.34-.75.75-.75s.75.34.75.75c0 .41-.34.75-.75.75zm4.7 0c-.41 0-.75-.34-.75-.75 0-.41.34-.75.75-.75s.75.34.75.75c0 .41-.34.75-.75.75z"/></svg>
-        Android
-      </a>
-      <button data-modal="privacy">Privacy Policy</button>
-      <button data-modal="terms">Terms of Service</button>
-    </div>
-  </footer>
 
   <!-- Privacy Modal -->
   <div class="modal-overlay" id="modal-privacy">
@@ -451,21 +469,6 @@
 
     var wm=new THREE.MeshBasicMaterial({color:0xffffff,wireframe:true,transparent:true,opacity:.22});
 
-    /* ── Hero 3D Star ── */
-    heroGroup=new THREE.Group();
-    var sm=wm.clone();sm.opacity=.28;
-    var va=new THREE.Mesh(new THREE.OctahedronGeometry(.8,0),sm.clone());
-    va.scale.set(.16,1,.16);heroGroup.add(va);
-    var ha=new THREE.Mesh(new THREE.OctahedronGeometry(.8,0),sm.clone());
-    ha.scale.set(1,.16,.16);heroGroup.add(ha);
-    var cg=new THREE.Mesh(new THREE.SphereGeometry(.2,12,8),sm.clone());
-    cg.material.opacity=.15;heroGroup.add(cg);
-    var hr=new THREE.Mesh(new THREE.TorusGeometry(1,.015,6,48),sm.clone());
-    hr.material.opacity=.06;heroGroup.add(hr);
-    var hr2=new THREE.Mesh(new THREE.TorusGeometry(1.15,.012,6,48),sm.clone());
-    hr2.material.opacity=.04;hr2.rotation.x=.5;hr2.rotation.y=.3;heroGroup.add(hr2);
-    heroGroup.position.set(0,1,0);
-    scene3d.add(heroGroup);
 
     /* ── H1: Monitor ── */
     var g1=new THREE.Group();
@@ -518,12 +521,14 @@
       partStart1[msi*3]=msr*Math.sin(msph)*Math.cos(msth);partStart1[msi*3+1]=msr*Math.sin(msph)*Math.sin(msth);partStart1[msi*3+2]=msr*Math.cos(msph)*.5;
       partPos1[msi*3]=partStart1[msi*3];partPos1[msi*3+1]=partStart1[msi*3+1];partPos1[msi*3+2]=partStart1[msi*3+2];
     }
-    var mti=0;
-    for(;mti<350;mti++){partTarget1[mti*3]=(Math.random()*2-1)*1.25;partTarget1[mti*3+1]=(Math.random()*2-1)*.82+.6;partTarget1[mti*3+2]=.04;}
-    for(;mti<500;mti++){var mside=Math.floor(Math.random()*4),mbx2=0,mby2=0;if(mside===0){mbx2=(Math.random()*2-1)*1.4;mby2=1.45;}else if(mside===1){mbx2=(Math.random()*2-1)*1.4;mby2=-.3;}else if(mside===2){mbx2=1.4;mby2=(Math.random()*2-1)*.88+.6;}else{mbx2=-1.4;mby2=(Math.random()*2-1)*.88+.6;}partTarget1[mti*3]=mbx2;partTarget1[mti*3+1]=mby2;partTarget1[mti*3+2]=.04;}
-    for(;mti<600;mti++){partTarget1[mti*3]=(Math.random()-.5)*.1;partTarget1[mti*3+1]=-.28-(mti-500)/99*.28;partTarget1[mti*3+2]=(Math.random()-.5)*.1;}
-    for(;mti<750;mti++){var mba=Math.random()*Math.PI*2,mbr=Math.sqrt(Math.random())*.6;partTarget1[mti*3]=Math.cos(mba)*mbr*1.1;partTarget1[mti*3+1]=-.57;partTarget1[mti*3+2]=Math.sin(mba)*mbr*.4;}
-    for(;mti<1000;mti++){partTarget1[mti*3]=(Math.random()*2-1)*1.0;partTarget1[mti*3+1]=-.72;partTarget1[mti*3+2]=.65+Math.random()*.65;}
+    for(var mti=0;mti<NPART;mti++){
+      var mf=mti/NPART,mbx2=0,mby2=0;
+      if(mf<.35){partTarget1[mti*3]=(Math.random()*2-1)*1.25;partTarget1[mti*3+1]=(Math.random()*2-1)*.82+.6;partTarget1[mti*3+2]=.04;}
+      else if(mf<.5){var mside=Math.floor(Math.random()*4);if(mside===0){mbx2=(Math.random()*2-1)*1.4;mby2=1.45;}else if(mside===1){mbx2=(Math.random()*2-1)*1.4;mby2=-.3;}else if(mside===2){mbx2=1.4;mby2=(Math.random()*2-1)*.88+.6;}else{mbx2=-1.4;mby2=(Math.random()*2-1)*.88+.6;}partTarget1[mti*3]=mbx2;partTarget1[mti*3+1]=mby2;partTarget1[mti*3+2]=.04;}
+      else if(mf<.6){partTarget1[mti*3]=(Math.random()-.5)*.1;partTarget1[mti*3+1]=-.28-Math.random()*.28;partTarget1[mti*3+2]=(Math.random()-.5)*.1;}
+      else if(mf<.75){var mba=Math.random()*Math.PI*2,mbr=Math.sqrt(Math.random())*.6;partTarget1[mti*3]=Math.cos(mba)*mbr*1.1;partTarget1[mti*3+1]=-.57;partTarget1[mti*3+2]=Math.sin(mba)*mbr*.4;}
+      else{partTarget1[mti*3]=(Math.random()*2-1)*1.0;partTarget1[mti*3+1]=-.72;partTarget1[mti*3+2]=.65+Math.random()*.65;}
+    }
     partTargets.push(partTarget1);
 
     /* ── H2: Dumbbell ── */
@@ -556,9 +561,12 @@
       partPos2[dsi*3]=partStart2[dsi*3];partPos2[dsi*3+1]=partStart2[dsi*3+1];partPos2[dsi*3+2]=partStart2[dsi*3+2];
     }
     var dPlateX=[-1.35,-1.15,1.15,1.35];
-    for(var dti2=0;dti2<150;dti2++){partTarget2[dti2*3]=(dti2/149)*2.4-1.2;partTarget2[dti2*3+1]=(Math.random()-.5)*.06;partTarget2[dti2*3+2]=(Math.random()-.5)*.06;}
-    for(var dp=0;dp<4;dp++)for(var dpi=0;dpi<175;dpi++){var dIdx=150+dp*175+dpi;var da=Math.random()*Math.PI*2,dr=Math.sqrt(Math.random())*.5;partTarget2[dIdx*3]=dPlateX[dp];partTarget2[dIdx*3+1]=Math.sin(da)*dr;partTarget2[dIdx*3+2]=Math.cos(da)*dr;}
-    for(var dc=0;dc<2;dc++)for(var dci=0;dci<75;dci++){var dIdx2=850+dc*75+dci;var da2=Math.random()*Math.PI*2,dr2=.1+Math.random()*.04;partTarget2[dIdx2*3]=[-1.0,1.0][dc];partTarget2[dIdx2*3+1]=Math.sin(da2)*dr2;partTarget2[dIdx2*3+2]=Math.cos(da2)*dr2;}
+    for(var dti2=0;dti2<NPART;dti2++){
+      var dff=dti2/NPART;
+      if(dff<.15){partTarget2[dti2*3]=(Math.random()*2-1)*1.2;partTarget2[dti2*3+1]=(Math.random()-.5)*.06;partTarget2[dti2*3+2]=(Math.random()-.5)*.06;}
+      else if(dff<.85){var dp=Math.floor(Math.random()*4),da=Math.random()*Math.PI*2,dr=Math.sqrt(Math.random())*.5;partTarget2[dti2*3]=dPlateX[dp];partTarget2[dti2*3+1]=Math.sin(da)*dr;partTarget2[dti2*3+2]=Math.cos(da)*dr;}
+      else{var dc=Math.floor(Math.random()*2),da2=Math.random()*Math.PI*2,dr2=.1+Math.random()*.04;partTarget2[dti2*3]=[-1.0,1.0][dc];partTarget2[dti2*3+1]=Math.sin(da2)*dr2;partTarget2[dti2*3+2]=Math.cos(da2)*dr2;}
+    }
     partTargets.push(partTarget2);
 
     /* ── H3: Particles → Donut ── */
@@ -654,13 +662,13 @@
       partPos5[si*3]=partStart5[si*3];partPos5[si*3+1]=partStart5[si*3+1];partPos5[si*3+2]=partStart5[si*3+2];
     }
     for(var st=0;st<NPART;st++){
-      if(st<400){
+      if(st<NPART*.4){
         var sPhi=Math.random()*Math.PI*2;var sTh=Math.acos(2*Math.random()-1);var sR=.32+Math.random()*.1;
         partTarget5[st*3]=sR*Math.sin(sTh)*Math.cos(sPhi);partTarget5[st*3+1]=sR*Math.sin(sTh)*Math.sin(sPhi);partTarget5[st*3+2]=sR*Math.cos(sTh)*.3;
       } else {
-        var sray=Math.floor((st-400)/75),srayJ=(st-400)%75;
+        var sray=Math.floor(Math.random()*8);
         var srayA=(sray/8)*Math.PI*2;
-        var srayD=.65+(srayJ/74)*.9;
+        var srayD=.65+Math.random()*.9;
         partTarget5[st*3]=Math.cos(srayA)*srayD;
         partTarget5[st*3+1]=Math.sin(srayA)*srayD;
         partTarget5[st*3+2]=(Math.random()-.5)*.04;
@@ -679,7 +687,7 @@
     unifiedGeo.setAttribute('position',new THREE.BufferAttribute(partUnified,3));
     var unifiedMat=new THREE.PointsMaterial({color:0xffffff,size:.038,transparent:true,opacity:.85,sizeAttenuation:true});
     partMesh=new THREE.Points(unifiedGeo,unifiedMat);
-    partMesh.position.set(mob?0:2,0,0);partMesh.visible=false;scene3d.add(partMesh);meshes.push(partMesh);
+    partMesh.position.set(mob?0:2,mob?.9:0,0);if(mob)partMesh.scale.setScalar(.48);partMesh.visible=false;scene3d.add(partMesh);meshes.push(partMesh);
 
     window.addEventListener('resize',function(){
       var w2=innerWidth,h2=innerHeight;
@@ -689,11 +697,7 @@
     /* ── Render Loop ── */
     (function r3d(){
       requestAnimationFrame(r3d);
-      if(heroGroup&&heroGroup.visible){
-        heroGroup.rotation.z+=.004;
-        heroGroup.rotation.x+=(mny*.3-heroGroup.rotation.x)*.04;
-        heroGroup.rotation.y+=(mnx*.4-heroGroup.rotation.y)*.04;
-      }
+
       if(curM>=0&&partMesh){
         var m=partMesh;
         m.rotation.y+=(mnx*.8-m.rotation.y)*.03;
@@ -767,8 +771,9 @@
 
   /* ── GSAP Timeline ── */
   gsap.registerPlugin(ScrollTrigger);
+  ScrollTrigger.config({ignoreMobileResize:true});
   var tl=gsap.timeline({scrollTrigger:{
-    trigger:'.pin-wrap',start:'top top',end:'+=13000',pin:true,scrub:1.5,
+    trigger:'.pin-wrap',start:'top top',end:'+='+(mob?9500:13000),pin:true,scrub:1.5,
     onUpdate:function(s){
       var p=s.progress;
       document.getElementById('shint').style.opacity=Math.max(0,1-p*20);
@@ -778,14 +783,14 @@
         var d=tl.totalDuration(),t=p*d;
         var he=tl.labels.heroEnd||1;
         if(t<he){
-          if(heroGroup)heroGroup.visible=true;
+
           if(partMesh)partMesh.visible=false;curM=-1;
           threeW.style.opacity=String(Math.max(0,1-t/he));
           var wc=document.getElementById('water-canvas');
           if(wc)wc.style.opacity='0';
           wActive=false;
         }else{
-          if(heroGroup)heroGroup.visible=false;
+
           upThree(p);
         }
       }
@@ -833,9 +838,7 @@
     .set('#s-cta',{opacity:1})
     .fromTo('.cta-title',{opacity:.03,scale:.9},{opacity:1,scale:1,duration:.8,ease:'power3.out'})
     .fromTo('.store-buttons',{opacity:0,y:18},{opacity:1,y:0,duration:.6,ease:'power3.out'},'<.25')
-
-  gsap.set('.site-footer',{opacity:0,y:24});
-  gsap.to('.site-footer',{opacity:1,y:0,duration:.9,ease:'power2.out',scrollTrigger:{trigger:'.site-footer',start:'top 98%'}});
+    .fromTo('.cta-credit',{opacity:0,y:10},{opacity:1,y:0,duration:.6,ease:'power2.out'},'<.3');
 
   /* ── Three.js State ── */
   function upThree(p){
@@ -908,5 +911,9 @@
 
   })();
   </script>
+
+  <!-- Vercel Web Analytics -->
+  <script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments);};</script>
+  <script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>

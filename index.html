@@ -897,12 +897,13 @@
     window.scrollTo(0,0);
     var pre=document.getElementById('pre');
     gsap.set('#s-hero',{opacity:1});
-    gsap.set('.hero-logo-mob',{opacity:0});
     if(threeW)threeW.style.opacity='1';
     gsap.timeline()
-      .to(pre,{opacity:0,duration:.55,delay:.18,ease:'power2.out',onComplete:function(){pre.style.display='none'}})
-      .fromTo('.hero-logo-mob',{opacity:0,y:14},{opacity:1,y:0,duration:1.2,ease:'power3.out'},'-=.38')
-      .fromTo('.hero-title',{opacity:0,y:22},{opacity:1,y:0,duration:1.7,ease:'power3.out'},'<.15');
+      .to(pre,{opacity:0,duration:.55,delay:.18,ease:'power2.out',onComplete:function(){
+        pre.style.display='none';
+        ScrollTrigger.refresh();
+      }})
+      .fromTo('.hero-title',{opacity:0,y:22},{opacity:1,y:0,duration:1.7,ease:'power3.out'},'-=.38');
   });
 
   })();

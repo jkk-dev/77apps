@@ -116,22 +116,71 @@
     .modal-box p{color:rgba(255,255,255,.5);line-height:1.7;font-size:.9rem}
 
     @media(max-width:768px){
-      #three-wrap,#cdot,#water-canvas{display:none !important}
+      /* Show 3D on mobile — only hide cursor dot + water canvas */
+      #cdot,#water-canvas{display:none !important}
+      #three-wrap{opacity:.68}
       *{cursor:auto !important}
-      .glass-bar{top:10px}
-      .glass-inner{gap:1.5rem;padding:8px 10px 8px 16px}
-      .glass-name{font-size:.78rem}
-      .glass-btn{padding:7px 18px;font-size:.72rem}
+
+      /* Nav */
+      .glass-bar{top:10px;width:calc(100% - 2rem);max-width:460px}
+      .glass-inner{gap:.8rem;padding:7px 10px 7px 12px}
+      .glass-logo{width:30px;height:30px;border-radius:7px}
+      .glass-name{font-size:.82rem}
+      .glass-btn{padding:6px 14px;font-size:.7rem;gap:.3rem}
+      .glass-dropdown{right:0;min-width:155px}
+
+      /* Hero */
       #s-hero{justify-content:center;padding-bottom:0}
-      .hero-logo-mob{width:clamp(240px,65vw,360px)}
-      .scene-h-left{align-items:center !important;padding:2rem !important}
+      .hero-logo-mob{width:clamp(140px,44vw,220px)}
+      .hero-title{font-size:clamp(3.2rem,16vw,5.5rem)}
+
+      /* Quote */
+      .tag-mark{display:none}
+      .tagline{font-size:clamp(1.4rem,5.5vw,2.4rem)}
+      .tag-attr{font-size:clamp(.7rem,2.5vw,.88rem)}
+
+      /* Setup */
+      .setup-text{font-size:clamp(1.2rem,4.5vw,2rem)}
+      .setup-icons{gap:clamp(.6rem,2.5vw,1.1rem);margin-top:1.8rem}
+      .app-icon-box{width:clamp(58px,14.5vw,76px);height:clamp(58px,14.5vw,76px)}
+      .setup-icon span{font-size:clamp(.58rem,2.2vw,.72rem)}
+
+      /* Habit scenes — text centred, particles behind */
+      .scene-h-left{align-items:center !important;padding:1.5rem !important}
       .scene-h-left .habit-content{text-align:center;align-items:center}
-      .habit-line{transform-origin:center;margin:1rem auto}
-      .store-buttons{flex-direction:column;align-items:center}
-      .store-btn{width:220px;justify-content:center}
-      .tag-mark,.impact-ring{display:none}
-      .setup-icons{gap:1rem;flex-wrap:wrap;justify-content:center}
-      .app-icon-box{width:68px;height:68px}
+      .habit-content{max-width:88vw}
+      .habit-line{transform-origin:center;margin:.75rem auto}
+      .habit-num{font-size:clamp(2.8rem,13vw,5.5rem)}
+      .habit-title{font-size:clamp(1.45rem,5.5vw,2.2rem);text-shadow:0 2px 24px rgba(0,0,0,.75)}
+      .habit-desc{font-size:clamp(.78rem,3vw,.92rem);max-width:78vw;text-shadow:0 1px 12px rgba(0,0,0,.6)}
+
+      /* Impact */
+      .impact-ring{display:none}
+      .impact-l{font-size:clamp(1.25rem,5.5vw,1.9rem)}
+      .impact-bold{font-size:clamp(1.55rem,6.5vw,2.3rem)}
+
+      /* CTA */
+      .cta-title{font-size:clamp(1.8rem,8.5vw,3.2rem)}
+      .store-buttons{flex-direction:column;align-items:center;gap:.7rem}
+      .store-btn{width:196px;justify-content:center}
+
+      /* Footer */
+      .site-footer{padding:1.1rem 1.2rem;flex-direction:column;align-items:flex-start;gap:.65rem}
+      .footer-links{flex-wrap:wrap;gap:.6rem 1rem}
+      .footer-copy{font-size:.7rem}
+
+      /* Modal */
+      .modal-overlay{padding:.75rem}
+      .modal-box{padding:1.4rem;border-radius:.9rem;max-height:90vh}
+      .modal-box h2{font-size:1.3rem}
+      .modal-box p{font-size:.88rem}
+    }
+    @media(max-width:390px){
+      .hero-title{font-size:clamp(2.8rem,15vw,4.5rem)}
+      .glass-bar{width:calc(100% - 1.4rem)}
+      .app-icon-box{width:54px;height:54px}
+      .store-btn{width:176px}
+      .tagline{font-size:clamp(1.2rem,5vw,2rem)}
     }
     @media(hover:none){#cdot{display:none !important}*{cursor:auto !important}}
   </style>
@@ -384,16 +433,16 @@
   /* ── Three.js ── */
   var threeW,renderer,scene3d,camera;
   var heroGroup,meshes=[],curM=-1;
-  var codeGroup,particleGeo,partStart,partTarget,NPART=1000;
+  var codeGroup,particleGeo,partStart,partTarget,NPART=mob?500:1000;
   var hProg=[0,0,0,0,0];
   var meshIdx=[0,1,2,3,4];
   var partTargets=[],partFrom,partUnified,morphT=1,partMesh,unifiedGeo;
 
-  if(!mob&&typeof THREE!=='undefined'){
+  if(typeof THREE!=='undefined'){
     threeW=document.getElementById('three-wrap');
     var w=innerWidth,h=innerHeight;
     renderer=new THREE.WebGLRenderer({alpha:true,antialias:true});
-    renderer.setSize(w,h);renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+    renderer.setSize(w,h);renderer.setPixelRatio(Math.min(devicePixelRatio,mob?1.5:2));
     renderer.localClippingEnabled=true;
     threeW.appendChild(renderer.domElement);
     scene3d=new THREE.Scene();
@@ -629,7 +678,7 @@
     unifiedGeo.setAttribute('position',new THREE.BufferAttribute(partUnified,3));
     var unifiedMat=new THREE.PointsMaterial({color:0xffffff,size:.038,transparent:true,opacity:.85,sizeAttenuation:true});
     partMesh=new THREE.Points(unifiedGeo,unifiedMat);
-    partMesh.position.set(2,0,0);partMesh.visible=false;scene3d.add(partMesh);meshes.push(partMesh);
+    partMesh.position.set(mob?0:2,0,0);partMesh.visible=false;scene3d.add(partMesh);meshes.push(partMesh);
 
     window.addEventListener('resize',function(){
       var w2=innerWidth,h2=innerHeight;
@@ -724,7 +773,7 @@
       document.getElementById('shint').style.opacity=Math.max(0,1-p*20);
       var dp=p-lastProg;svel=Math.abs(dp)*200;lastProg=p;
       if(wActive&&svel>2)for(var i=0;i<3;i++)wDrop(10+Math.random()*(WR-20)|0,10+Math.random()*(WR-20)|0,2+Math.random()*3|0,svel*3);
-      if(!mob&&renderer){
+      if(renderer){
         var d=tl.totalDuration(),t=p*d;
         var he=tl.labels.heroEnd||1;
         if(t<he){
